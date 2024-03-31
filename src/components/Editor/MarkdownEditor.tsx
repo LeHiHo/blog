@@ -17,7 +17,7 @@ const MarkdownEditor: React.FC = () => {
   };
 
   return (
-    <div className="markdown-editor">
+    <div className="markdown-editor p-4 max-w-4xl mx-auto">
       <textarea
         className="editor-input"
         value={text}
@@ -25,6 +25,7 @@ const MarkdownEditor: React.FC = () => {
         placeholder="여기에 마크다운을 입력하세요..."
       />
       <div className="preview" dangerouslySetInnerHTML={getMarkdownText()} />
+      <div className="bg-black">123</div>
     </div>
   );
 };
