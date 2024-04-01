@@ -26,6 +26,8 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["./node_modules/@types/marked/node_modules", "./types"],
+
     "plugins": [
       {
         "name": "next"
