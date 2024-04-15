@@ -10,15 +10,15 @@ import 'prismjs/components/prism-python';
 // 테마
 import 'prismjs/themes/prism-tomorrow.css';
 
-import 'prismjs/plugins/autolinker/prism-autolinker';
-import 'prismjs/plugins/command-line/prism-command-line';
-// import 'prismjs/plugins/download-button/prism-download-button';
-import 'prismjs/plugins/highlight-keywords/prism-highlight-keywords';
-import 'prismjs/plugins/show-language/prism-show-language';
-import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
-import 'prismjs/plugins/inline-color/prism-inline-color';
-import 'prismjs/plugins/previewers/prism-previewers';
-import 'prismjs/plugins/toolbar/prism-toolbar';
+// import 'prismjs/plugins/autolinker/prism-autolinker';
+// import 'prismjs/plugins/command-line/prism-command-line';
+// // import 'prismjs/plugins/download-button/prism-download-button';
+// import 'prismjs/plugins/highlight-keywords/prism-highlight-keywords';
+// import 'prismjs/plugins/show-language/prism-show-language';
+// import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
+// import 'prismjs/plugins/inline-color/prism-inline-color';
+// import 'prismjs/plugins/previewers/prism-previewers';
+// import 'prismjs/plugins/toolbar/prism-toolbar';
 
 const MarkdownEditor: React.FC = () => {
   const [text, setText] = useState<string>('');
