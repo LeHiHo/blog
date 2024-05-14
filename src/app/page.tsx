@@ -1,10 +1,17 @@
 import MarkdownEditor from '@/components/Editor/MarkdownEditor';
 import { Button } from '@/components/ui/button';
+import { ModeToggle } from '@/components/ui/modeToggle';
 
 export default function Home() {
   return (
     <>
-      <Button type="submit">123</Button>
+      <header>
+        <div className="flex justify-end m-1">
+          <ModeToggle />
+        </div>
+      </header>
+      <main>
+      </main>
     </>
   );
 }
