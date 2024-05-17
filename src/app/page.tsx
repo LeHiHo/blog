@@ -6,12 +6,12 @@ export default function Home() {
   return (
     <>
       <header>
-        <div className="flex justify-end m-1">
+        <div className="flex justify-between m-1">
+          <h1>lehiho's blog</h1>
           <ModeToggle />
         </div>
       </header>
-      <main>
-      </main>
+      <main className="flex items-center justify-center">안녕하세요</main>
     </>
   );
 }
