@@ -12,7 +12,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 
 // import 'prismjs/plugins/autolinker/prism-autolinker';
 // import 'prismjs/plugins/command-line/prism-command-line'
-// // import 'prismjs/plugins/download-button/prism-download-button';
+// import 'prismjs/plugins/download-button/prism-download-button';
 // import 'prismjs/plugins/highlight-keywords/prism-highlight-keywords';
 // import 'prismjs/plugins/show-language/prism-show-language';
 // import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
@@ -20,16 +20,16 @@ import 'prismjs/themes/prism-tomorrow.css';
 // import 'prismjs/plugins/previewers/prism-previewers';
 // import 'prismjs/plugins/toolbar/prism-toolbar';
 
-const MarkdownEditor: React.FC = () => { const [text, setText] = useState<string>('');
+const MarkdownEditor: React.FC = () => {
+  const [text, setText] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setText(e.target.value);
   };
-// getMarkdownText 함수 내에서 marked 사용
+
   const getMarkdownText = (): { __html: string } => {
     const rawMarkup = marked(text, {
       highlight: function (code: string, lang: string): string {
-        // TypeScript를 사용하면서 Prism.languages[lang]의 존재 여부를 체크
         const language = Prism.languages[lang] ? lang : 'markup';
         return Prism.highlight(code, Prism.languages[language], language);
       },
