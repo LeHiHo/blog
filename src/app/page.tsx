@@ -2,6 +2,7 @@ import MarkdownEditor from '@/components/Editor/MarkdownEditor';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/ui/modeToggle';
 import { supabase } from '@/lib/supabaseClient';
+import ReactMarkdown from 'react-markdown';
 
 export default async function Home() {
   const { data: posts } = await supabase.from('test').select();
@@ -25,15 +26,15 @@ export default async function Home() {
         </div>
       </main>
       <body>
-        <div className="ml-5">
+        <div className="ml-5 prose">
           {posts?.map((post) => (
             <div key={post.id} className="mb-4">
               <h2 className="text-xl font-bold">{post.title}</h2>
               <p className="text-sm">
                 {new Date(post.created_at).toLocaleDateString()}
               </p>
-              <div className="mt-2">
-                <p>{post.content}</p>
+              <div className="">
+                <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             </div>
           ))}
