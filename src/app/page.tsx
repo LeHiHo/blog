@@ -26,7 +26,7 @@ export default async function Home() {
         </div>
       </main>
       <body>
-        <div className="ml-5 prose">
+        <div className="ml-5 prose dark:prose-dark">
           {posts?.map((post) => (
             <div key={post.id} className="mb-4">
               <h2 className="text-xl font-bold">{post.title}</h2>
