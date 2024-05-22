@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { ModeToggle } from '@/components/ui/modeToggle';
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ['latin'],
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={notoSansKr.className}>
+      <body className={`${notoSansKr.className}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
