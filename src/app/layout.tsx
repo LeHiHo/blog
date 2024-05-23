@@ -21,13 +21,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKr.className}`}>
+      <body className={notoSansKr.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange>
-          {children}
+          <header className="w-full">
+            <div className="flex justify-between m-1 items-center">
+              <h1>lehiho's blog</h1>
+              <ModeToggle />
+            </div>
+          </header>
+          <hr />
+          <main className="mx-auto max-w-screen-md">{children}</main>
+          <hr />
+          <footer className="w-full text-center py-4">
+            <p>© 2024 Lehiho's Blog. All rights reserved.</p>
+          </footer>
         </ThemeProvider>
       </body>
     </html>
