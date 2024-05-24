@@ -57,3 +57,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+.prose a {
+  @apply no-underline;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.dark .prose a {
+  color: white;
+}

@@ -24,14 +24,23 @@ export default async function Home() {
           {posts?.map((post) => (
             <article key={post.id} className="mb-4">
               <header>
-                <h2 className="text-xl font-bold">{post.title}</h2>
+                <h2>
+                  <a className="transition duration-200 ease-in-out font-extrabold">
+                    {post.title}
+                  </a>
+                </h2>
                 <p className="text-sm">
-                  {new Date(post.created_at).toLocaleDateString()}
+                  {new Date(post.created_at).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: '2-digit',
+                    year: 'numeric',
+                  })}
                 </p>
               </header>
-              <div>
-                <ReactMarkdown>{post.content}</ReactMarkdown>
+              <div className="mt-2">
+                <ReactMarkdown>{post.summary}</ReactMarkdown>
               </div>
+              <div className="mt-4 flex space-x-2">{post.tags}</div>
             </article>
           ))}
         </section>
