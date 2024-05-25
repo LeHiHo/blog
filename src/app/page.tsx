@@ -2,9 +2,12 @@ import MarkdownEditor from '@/components/Editor/MarkdownEditor';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabaseClient';
 import ReactMarkdown from 'react-markdown';
+import { Badge } from '@/components/ui/badge';
 
 export default async function Home() {
   const { data: posts } = await supabase.from('test').select();
+
+  console.log(posts);
 
   return (
     <>
@@ -40,7 +43,7 @@ export default async function Home() {
               <div className="mt-2">
                 <ReactMarkdown>{post.summary}</ReactMarkdown>
               </div>
-              <div className="mt-4 flex space-x-2">{post.tags}</div>
+              <Badge className="mt-4 flex space-x-2">{post.tags}</Badge>
             </article>
           ))}
         </section>
