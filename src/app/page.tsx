@@ -5,11 +5,9 @@ import { Badge } from '@/components/ui/badge';
 export default async function Home() {
   const { data: posts } = await supabase.from('test').select();
 
-  console.log(posts);
-
   return (
     <>
-      <section className="flex items-center justify-center my-8">
+      <section className="flex items-center justify-start my-8 j">
         <div className="flex">
           <div className="bg-red-800 p-10 rounded-full"></div>
           <div className="ml-5">
