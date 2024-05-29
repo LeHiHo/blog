@@ -27,9 +27,9 @@ export default function RootLayout({
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange>
-          <header className="w-full">
+          <header className="w-full px-10 py-3">
             <div className="flex justify-between m-1 items-center">
-              <h1>lehiho's blog</h1>
+              <h1 className="text-2xl font-extrabold">lehiho's blog</h1>
               <ModeToggle />
             </div>
           </header>
