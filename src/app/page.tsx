@@ -24,7 +24,9 @@ export default async function Home() {
             <article key={post.id} className="mb-4">
               <header>
                 <h2>
-                  <a className="transition duration-200 ease-in-out font-extrabold text-4xl">
+                  <a
+                    href="/"
+                    className="transition duration-200 ease-in-out font-extrabold text-4xl">
                     {post.title}
                   </a>
                 </h2>

@@ -29,7 +29,7 @@ export default function RootLayout({
           disableTransitionOnChange>
           <header className="w-full px-10 py-3">
             <div className="flex justify-between m-1 items-center">
-              <h1 className="text-2xl font-extrabold">lehiho's blog</h1>
+              <h1 className="text-2xl font-extrabold">lehiho&apos;s blog</h1>
               <ModeToggle />
             </div>
           </header>
@@ -37,7 +37,7 @@ export default function RootLayout({
           <main className="mx-auto max-w-screen-md">{children}</main>
           <hr />
           <footer className="w-full text-center py-4">
-            <p>© 2024 Lehiho's Blog. All rights reserved.</p>
+            <p>© 2024 Lehiho&apos;s Blog. All rights reserved.</p>
           </footer>
         </ThemeProvider>
       </body>
