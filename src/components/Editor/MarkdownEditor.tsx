@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ChangeEvent } from 'react';
-// @ts-ignore
+// @ts-expect-error: import문 오류로 인해 무시
 import { marked } from 'marked';
 import Prism from 'prismjs';
 // 언어
