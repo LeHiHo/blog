@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npm run build && npm run export && gh-pages -d out"
+    "deploy": "pnpm run build && pnpm run export && gh-pages -d out"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",
