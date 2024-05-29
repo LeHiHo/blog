@@ -1,5 +1,3 @@
-import MarkdownEditor from '@/components/Editor/MarkdownEditor';
-import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabaseClient';
 import ReactMarkdown from 'react-markdown';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +11,7 @@ export default async function Home() {
         <div className="flex">
           <div className="bg-red-800 p-10 rounded-full"></div>
           <div className="ml-5">
-            <p className="font-extrabold">@Lehiho</p>
+            <p className="font-extrabold text-2xl">@Lehiho</p>
             <p>기억보다 기록을</p>
             <p>각종 url</p>
           </div>
@@ -26,7 +24,7 @@ export default async function Home() {
             <article key={post.id} className="w-full ">
               <header>
                 <h2>
-                  <a className="transition duration-200 ease-in-out font-extrabold">
+                  <a className="transition duration-200 ease-in-out font-extrabold text-4xl">
                     {post.title}
                   </a>
                 </h2>
@@ -43,7 +41,9 @@ export default async function Home() {
               </div>
               <div className="flex space-x-2">
                 {post.tags.map((tag: string, index: number) => (
-                  <Badge key={index}>{tag}</Badge>
+                  <Badge key={index} className="text-sm">
+                    {tag}
+                  </Badge>
                 ))}
               </div>
               <hr />

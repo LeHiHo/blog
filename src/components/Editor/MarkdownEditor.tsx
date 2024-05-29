@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ChangeEvent } from 'react';
+// @ts-ignore
 import { marked } from 'marked';
 import Prism from 'prismjs';
 // 언어
