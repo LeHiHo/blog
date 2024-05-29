@@ -5,9 +5,11 @@ import { Badge } from '@/components/ui/badge';
 export default async function Home() {
   const { data: posts } = await supabase.from('test').select();
 
+  console.log(posts);
+
   return (
     <>
-      <section className="flex items-center justify-start my-8">
+      <section className="flex items-center justify-center my-8">
         <div className="flex">
           <div className="bg-red-800 p-10 rounded-full"></div>
           <div className="ml-5">
@@ -18,10 +20,10 @@ export default async function Home() {
         </div>
       </section>
       <hr className="my-4 border-t-2 border-gray-300" />
-      <main className="w-full">
-        <section className="mx-auto max-w-7xl w-full prose dark:prose-dark">
+      <main>
+        <section className="ml-5 prose dark:prose-dark">
           {posts?.map((post) => (
-            <article key={post.id} className="w-full ">
+            <article key={post.id} className="mb-4">
               <header>
                 <h2>
                   <a className="transition duration-200 ease-in-out font-extrabold text-4xl">
@@ -36,7 +38,7 @@ export default async function Home() {
                   })}
                 </p>
               </header>
-              <div>
+              <div className="mt-2">
                 <ReactMarkdown>{post.summary}</ReactMarkdown>
               </div>
               <div className="flex space-x-2">
