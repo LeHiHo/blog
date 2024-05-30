@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useEffect, ChangeEvent } from 'react';
 // @ts-expect-error: import문 오류로 인해 무시
 import { marked } from 'marked';
 import Prism from 'prismjs';
@@ -10,7 +10,6 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-python';
 // 테마
 import 'prismjs/themes/prism-tomorrow.css';
-
 // import 'prismjs/plugins/autolinker/prism-autolinker';
 // import 'prismjs/plugins/command-line/prism-command-line'
 // import 'prismjs/plugins/download-button/prism-download-button';
@@ -21,15 +20,18 @@ import 'prismjs/themes/prism-tomorrow.css';
 // import 'prismjs/plugins/previewers/prism-previewers';
 // import 'prismjs/plugins/toolbar/prism-toolbar';
 
-const MarkdownEditor: React.FC = () => {
-  const [text, setText] = useState<string>('');
+interface MarkdownEditorProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
+const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    setText(e.target.value);
+    onChange(e.target.value);
   };
 
   const getMarkdownText = (): { __html: string } => {
-    const rawMarkup = marked(text, {
+    const rawMarkup = marked(value, {
       highlight: function (code: string, lang: string): string {
         const language = Prism.languages[lang] ? lang : 'markup';
         return Prism.highlight(code, Prism.languages[language], language);
@@ -40,13 +42,13 @@ const MarkdownEditor: React.FC = () => {
 
   useEffect(() => {
     Prism.highlightAll();
-  }, [text]);
+  }, [value]);
 
   return (
     <div className="flex flex-row h-screen">
       <textarea
         className="editor-input flex-1 p-4 border-r border-gray-300 resize-none outline-none"
-        value={text}
+        value={value}
         onChange={handleChange}
         placeholder="여기에 마크다운을 입력하세요..."
       />
