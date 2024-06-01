@@ -5,12 +5,30 @@ import MarkdownEditor from '@/components/Editor/MarkdownEditor';
 
 export default function Write() {
   const [content, setContent] = useState('');
+  const [title, setTitle] = useState('');
+  const [summary, setSummary] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleContentChange = (newContent: string) => {
     setContent(newContent);
   };
 
-  console.log(content);
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleSummaryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSummary(e.target.value);
+  };
+
+  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTags(e.target.value.split(',').map((tag) => tag.trim()));
+  };
+
+  const handleContentSubmit = () => {
+    setIsSubmitting(true);
+  };
 
   const handleSubmit = async () => {
     try {
@@ -19,7 +37,7 @@ export default function Write() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ title, summary, content, tags }),
       });
 
       if (!response.ok) {
@@ -28,7 +46,11 @@ export default function Write() {
       }
 
       alert('Content submitted successfully');
-      setContent(''); // Clear the content after successful submission
+      setTitle('');
+      setSummary('');
+      setContent('');
+      setTags([]);
+      setIsSubmitting(false); // Reset the form state
     } catch (error) {
       console.error('Error submitting content:', error);
       alert('Error submitting content');
@@ -37,8 +59,61 @@ export default function Write() {
 
   return (
     <div>
-      <MarkdownEditor value={content} onChange={handleContentChange} />
-      <button onClick={handleSubmit}>Submit</button>
+      {!isSubmitting ? (
+        <>
+          <MarkdownEditor value={content} onChange={handleContentChange} />
+          <button onClick={handleContentSubmit}>Submit</button>
+        </>
+      ) : (
+        <div className="mt-4">
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700">
+              Title
+            </label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"
+            />
+          </div>
+          <div className="mt-4">
+            <label
+              htmlFor="summary"
+              className="block text-sm font-medium text-gray-700">
+              Summary
+            </label>
+            <textarea
+              id="summary"
+              value={summary}
+              onChange={handleSummaryChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"
+            />
+          </div>
+          <div className="mt-4">
+            <label
+              htmlFor="tags"
+              className="block text-sm font-medium text-gray-700">
+              Tags (comma separated)
+            </label>
+            <input
+              id="tags"
+              type="text"
+              value={tags.join(', ')}
+              onChange={handleTagsChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"
+            />
+          </div>
+          <button
+            onClick={handleSubmit}
+            className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
+            Submit All
+          </button>
+        </div>
+      )}
     </div>
   );
 }
