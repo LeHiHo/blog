@@ -3,6 +3,11 @@ import ReactMarkdown from 'react-markdown';
 import { Badge } from '@/components/ui/badge';
 import React from 'react';
 
+//TODO: 1. 게시물 상세페이지구현
+//TODO: 2. 메인페이지에서 글제목클릭하면 상세페이지로
+//TODO: 3. 헤더 클릭시 메인으로
+
+
 export default async function Home() {
   const { data: posts } = await supabase.from('test').select();
 
@@ -44,7 +49,7 @@ export default async function Home() {
                   <ReactMarkdown>{post.summary}</ReactMarkdown>
                 </div>
                 <div className="flex space-x-2">
-                  {post.tags.map((tag: string, index: number) => (
+                  {post.tags?.map((tag: string, index: number) => (
                     <Badge key={index} className="text-sm">
                       {tag}
                     </Badge>

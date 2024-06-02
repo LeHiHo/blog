@@ -2,8 +2,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const { content } = await request.json();
-  console.log(content);
+  const { title, summary, content, tags } = await request.json();
 
   if (!content) {
     return NextResponse.json({ error: 'Content is required' }, { status: 400 });
@@ -12,7 +11,9 @@ export async function POST(request: NextRequest) {
   try {
     const { data, error } = await supabase
       .from('test')
-      .insert([{ content, created_at: new Date().toISOString() }]);
+      .insert([
+        { title, summary, content, tags, created_at: new Date().toISOString() },
+      ]);
 
     if (error) {
       throw error;
