@@ -1,5 +1,9 @@
 'use client';
 
+// TODO: 1. shadcn/ui 모달적용
+// TODO: 2. Server Action이나 form으로 리펙토링
+// TODO: 3. 이미지 삽입기능
+
 import { useState } from 'react';
 import MarkdownEditor from '@/components/Editor/MarkdownEditor';
 
