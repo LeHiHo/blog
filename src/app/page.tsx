@@ -5,14 +5,12 @@ import React from 'react';
 
 //TODO: 1. 게시물 상세페이지구현
 //TODO: 2. 메인페이지에서 글제목클릭하면 상세페이지로
-//TODO: 3. 헤더 클릭시 메인으로
-
 
 export default async function Home() {
   const { data: posts } = await supabase.from('test').select();
 
   return (
-    <>
+    <div className="mx-auto max-w-screen-md">
       <section className="flex items-center justify-start my-8">
         <div className="flex">
           <div className="bg-red-800 p-10 rounded-full"></div>
@@ -61,6 +59,6 @@ export default async function Home() {
           ))}
         </section>
       </main>
-    </>
+    </div>
   );
 }
