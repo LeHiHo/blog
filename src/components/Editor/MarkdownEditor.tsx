@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, ChangeEvent } from 'react';
+import React, { useEffect, ChangeEvent, useState } from 'react';
+import { Input } from '../ui/input';
 // @ts-expect-error: import문 오류로 인해 무시
 import { marked } from 'marked';
 import Prism from 'prismjs';
@@ -26,12 +27,19 @@ interface MarkdownEditorProps {
 }
 
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
+  const [title, setTitle] = useState('');
+
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setTitle(e.target.value);
+  };
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     onChange(e.target.value);
   };
 
   const getMarkdownText = (): { __html: string } => {
-    const rawMarkup = marked(value, {
+    const markdownWithHeader = `# ${title}\n\n${value}`;
+    const rawMarkup = marked(markdownWithHeader, {
       highlight: function (code: string, lang: string): string {
         const language = Prism.languages[lang] ? lang : 'markup';
         return Prism.highlight(code, Prism.languages[language], language);
@@ -42,16 +50,32 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
 
   useEffect(() => {
     Prism.highlightAll();
-  }, [value]);
+  }, [value, title]);
 
   return (
-    <div className="flex flex-row h-screen">
-      <textarea
-        className="editor-input flex-1 p-4 border-r border-gray-300 resize-none outline-none"
-        value={value}
-        onChange={handleChange}
-        placeholder="여기에 마크다운을 입력하세요..."
-      />
+    <div className="flex flex-row h-screen justify-center">
+      <div className="flex flex-col flex-1">
+        <input
+          className="editor-input p-4 border-b border-gray-300 outline-none"
+          value={title}
+          onChange={handleTitleChange}
+          placeholder="제목을 입력하세요"
+          style={{ fontSize: '2rem', fontWeight: 'bold', color: '#888' }}
+        />
+        <input
+          className="editor-input p-4 border-b border-gray-300 outline-none"
+          // value={tag}
+          // onChange={handleTitleChange}
+          placeholder="태그를 입력하세요"
+        />
+
+        <textarea
+          className="editor-input flex-1 p-4  resize-none outline-none"
+          value={value}
+          onChange={handleChange}
+          placeholder="여기에 마크다운을 입력하세요..."
+        />
+      </div>
       <div
         className="preview flex-1 p-4 overflow-auto prose"
         dangerouslySetInnerHTML={getMarkdownText()}

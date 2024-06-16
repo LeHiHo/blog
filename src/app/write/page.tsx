@@ -66,7 +66,25 @@ export default function Write() {
       {!isSubmitting ? (
         <>
           <MarkdownEditor value={content} onChange={handleContentChange} />
-          <button onClick={handleContentSubmit}>Submit</button>
+          {/* <Button onClick={handleContentSubmit}>작성완료</Button> */}
+
+          {/* <Dialog>
+            <DialogTrigger>
+              <Button>작성완료</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                <DialogDescription>
+                  <Input
+                    id="name"
+                    placeholder="Pedro Duarte"
+                    className="col-span-3"
+                  />
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog> */}
         </>
       ) : (
         <div className="mt-4">
