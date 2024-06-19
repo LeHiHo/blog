@@ -1,11 +1,11 @@
 'use client';
 
 // TODO: 1. shadcn/ui 모달 퍼블리싱 완성
-// TODO: 2. Server Action으로 리팩토링
 // TODO: 4. 이미지 삽입기능
-// TODO: 5. useRef사용해서 텍스트입력할떄마다 상태안변하게하기
 
 import React, { useEffect, ChangeEvent, KeyboardEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { WriteSubmitAction } from '@/app/write/action';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import {
@@ -28,11 +28,12 @@ import 'prismjs/components/prism-python';
 import 'prismjs/themes/prism-tomorrow.css';
 
 const MarkdownEditor: React.FC = () => {
+  const router = useRouter();
+
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [content, setContent] = useState('');
   const [summary, setSummary] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
@@ -52,33 +53,6 @@ const MarkdownEditor: React.FC = () => {
 
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setContent(e.target.value);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch('/write/api', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title, summary, content, tags }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to submit content');
-      }
-
-      alert('Content submitted successfully');
-      setTitle('');
-      setSummary('');
-      setContent('');
-      setTags([]);
-      setIsSubmitting(false); // Reset the form state
-    } catch (error) {
-      console.error('Error submitting content:', error);
-      alert('Error submitting content');
-    }
   };
 
   const getMarkdownText = (): { __html: string } => {
@@ -103,13 +77,13 @@ const MarkdownEditor: React.FC = () => {
       <div className="flex flex-row h-screen justify-center">
         <div className="flex flex-col flex-1 p-4">
           <input
-            className="editor-input mb-2 p-2 border border-gray-300 outline-none"
+            className="editor-input mb-2 p-2 outline-none"
             value={title}
             onChange={handleTitleChange}
             placeholder="제목을 입력하세요"
             style={{ fontSize: '2rem', fontWeight: 'bold', color: '#888' }}
           />
-          <div className="editor-input mb-2 p-2 border border-gray-300 outline-none flex flex-wrap items-center">
+          <div className="editor-input mb-2 p-2 outline-none flex flex-wrap items-center">
             {tags.map((tag, index) => (
               <Badge
                 key={index}
@@ -127,7 +101,7 @@ const MarkdownEditor: React.FC = () => {
             />
           </div>
           <textarea
-            className="editor-input flex-1 p-2 border border-gray-300 resize-none outline-none"
+            className="editor-input flex-1 p-2 resize-none outline-none"
             value={content}
             onChange={handleContentChange}
             placeholder="여기에 마크다운을 입력하세요..."
@@ -140,7 +114,7 @@ const MarkdownEditor: React.FC = () => {
       </div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>작성완료</Button>
+          <Button className="ml-4 mb-4">작성완료</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -155,9 +129,25 @@ const MarkdownEditor: React.FC = () => {
               />
             </DialogDescription>
           </DialogHeader>
-          <Button onClick={handleSubmit} disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </Button>
+
+          <form
+            action={async () => {
+              {
+                const result = await WriteSubmitAction(
+                  title,
+                  tags,
+                  content,
+                  summary,
+                );
+                if (result.success) {
+                  router.push('/');
+                } else {
+                  alert(result.message);
+                }
+              }
+            }}>
+            <Button type="submit">제출하기</Button>
+          </form>
         </DialogContent>
       </Dialog>
     </>
