@@ -29,12 +29,14 @@ export default function RootLayout({
           disableTransitionOnChange>
           <header className="w-full px-10 py-3">
             <div className="flex justify-between m-1 items-center">
-              <h1 className="text-2xl font-extrabold">lehiho&apos;s blog</h1>
+              <a href="/" className="text-2xl font-extrabold">
+                lehiho&apos;s blog
+              </a>
               <ModeToggle />
             </div>
           </header>
           <hr />
-          <main className="mx-auto max-w-screen-md">{children}</main>
+          <main>{children}</main>
           <hr />
           <footer className="w-full text-center py-4">
             <p>© 2024 Lehiho&apos;s Blog. All rights reserved.</p>
