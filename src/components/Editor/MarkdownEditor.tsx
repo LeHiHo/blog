@@ -2,7 +2,6 @@
 
 // TODO: 1. shadcn/ui 모달 퍼블리싱 완성
 // TODO: 2. Server Action으로 리팩토링
-// TODO: 3. page.tsx 정리 -> 기능은 마크다운 에디터에서만
 // TODO: 4. 이미지 삽입기능
 // TODO: 5. useRef사용해서 텍스트입력할떄마다 상태안변하게하기
 
